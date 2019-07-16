@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
+<head>
+    <title>Inbox</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+<body>
+<br/>
+<div class="container">
+    <form action="send">
+        <input type="submit" value="Send mail" class="btn btn-default">
+    </form>
+</div>
+<div class="container">
+    <h3>
+        Inbox:
+    </h3>
+    <div class="container" style="color: red" >
+        <div>
+            <dt th:text="${inboxError}"></dt>
+        </div>
+    </div>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <td>Date</td>
+            <td>From</td>
+            <td>Subject</td>
+        </tr>
+        </thead>
+        <tbody>
+        <th:block th:each=" msg : ${inbox_messages}">
+            <tr>
+                <td th:text="${#calendars.format(msg.date,'yyyy-MM-dd HH:mm')}"></td>
+                <td th:text="${msg.from}"></td>
+                <td th:text="${msg.subject}"></td>
+            </tr>
+        </th:block>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<!--<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">-->
+<!--<html xmlns:th="http://www.thymeleaf.org" xmlns:form="http://www.w3.org/1999/xhtml">-->
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
+<head>
+    <title>Inbox</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>-->
+    <!--    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
+</head>
+<body>
+<br/>
+<div class="container" style="margin-bottom: 15px">
+    <form action="inbox">
+        <input type="submit" value="Return to inbox" class="btn btn-default">
+    </form>
+</div>
+<div class="container">
+    <div class="container" style="font-size: xx-large; color: red">
+        <div>
+            <dt th:text="${sendError}"></dt>
+        </div>
+    </div>
+    <div class="container" style="font-size: xx-large; color: green">
+        <div>
+            <dt th:text="${sendMessage}"></dt>
+        </div>
+    </div>
+    <form action="send" method="post" th:modelAttribute="mail">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="to">E-mail:</label>
+                    <input type="text" name="to" id="to" class="form-control"
+                           placeholder="E-mail получателя" required>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="subject">Тема:</label>
+                    <input type="text" name="subject" id="subject" class="form-control"
+                           placeholder="Тема письма" required>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="body">Текст письма:</label>
+                    <textarea rows="20" name="body" id="body" class="form-control" required></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <input type="submit" value="Отправить" class="btn btn-default">
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+</html>
