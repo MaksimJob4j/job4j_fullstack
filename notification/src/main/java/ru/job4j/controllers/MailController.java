@@ -2,6 +2,7 @@ package ru.job4j.controllers;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.mail.MailException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
@@ -44,9 +45,9 @@ public class MailController {
         try {
             this.mailService.send(notification);
             model.addAttribute("sendMessage", "Mail sent successfully!");
-        } catch (MessagingException e) {
+        } catch (MailException e) {
             LOGGER.error(e.getMessage(), e);
-            model.addAttribute("sendError", e.getMessage());
+            model.addAttribute("sendError", "Sending error!");
         }
         return "sendMail";
     }

@@ -1,12 +1,13 @@
 package ru.job4j.service;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.mail.MailException;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 import ru.job4j.domain.Notification;
 
 import javax.mail.*;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -15,15 +16,18 @@ import java.util.Properties;
 
 @Service
 public class MailService {
+    private final JavaMailSender sender;
 
-    @Value("${mail.username}")
+    @Value("${spring.mail.username}")
     private String user;
-    @Value("${mail.password}")
+    @Value("${spring.mail.password}")
     private String password;
-    @Value("${mail.pop3.host}")
+    @Value("${spring.mail.pop3.host}")
     private String pop3Host;
-    @Value("${mail.smtp.host}")
-    private String smtpHost;
+
+    public MailService(JavaMailSender sender) {
+        this.sender = sender;
+    }
 
     public List<Notification> receive() throws IOException, MessagingException {
         final var msgs = new ArrayList<Notification>();
@@ -50,29 +54,11 @@ public class MailService {
         return msgs;
     }
 
-    public void send(Notification notification) throws MessagingException {
-        Properties props = new Properties();
-        props.put("mail.smtp.host", this.smtpHost);
-        props.put("mail.smtp.socketFactory.port", "465");
-        props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
-        props.put("mail.smtp.auth", "true");
-        props.put("mail.smtp.port", "465");
-        Session session = Session.getInstance(
-                props,
-                new javax.mail.Authenticator() {
-                    protected PasswordAuthentication getPasswordAuthentication() {
-                        return new PasswordAuthentication(user, password);
-                    }
-                }
-        );
-        Message message = new MimeMessage(session);
-        message.setFrom(new InternetAddress(this.user));
-        message.setRecipients(
-                Message.RecipientType.TO,
-                InternetAddress.parse(notification.getTo())
-        );
+    public void send(Notification notification) throws MailException {
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setTo(notification.getTo());
         message.setSubject(notification.getSubject());
         message.setText(notification.getBody());
-        Transport.send(message);
+        this.sender.send(message);
     }
 }

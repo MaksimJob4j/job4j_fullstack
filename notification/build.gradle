@@ -10,4 +10,6 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     compile group: 'javax.mail', name: 'mail', version: '1.4.7'
     compile('org.springframework.boot:spring-boot-starter-thymeleaf')
+    // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-mail
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-mail', version: '2.1.6.RELEASE'
 }
