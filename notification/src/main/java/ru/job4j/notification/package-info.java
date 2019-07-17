@@ -13,4 +13,4 @@
  *    В качестве объекта использовать class Notification.
  *
  */
-package ru.job4j;
+package ru.job4j.notification;

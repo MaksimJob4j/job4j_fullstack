@@ -1,11 +1,11 @@
-package ru.job4j.service;
+package ru.job4j.notification.service;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.MailException;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
-import ru.job4j.domain.Notification;
+import ru.job4j.notification.domain.Notification;
 
 import javax.mail.*;
 import java.io.IOException;

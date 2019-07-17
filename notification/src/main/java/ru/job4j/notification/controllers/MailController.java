@@ -1,4 +1,4 @@
-package ru.job4j.controllers;
+package ru.job4j.notification.controllers;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -6,8 +6,8 @@ import org.springframework.mail.MailException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
-import ru.job4j.domain.Notification;
-import ru.job4j.service.MailService;
+import ru.job4j.notification.domain.Notification;
+import ru.job4j.notification.service.MailService;
 
 import javax.mail.MessagingException;
 import java.io.IOException;
