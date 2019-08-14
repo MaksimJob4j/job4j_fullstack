@@ -1,6 +1,7 @@
 package ru.job4j.shop;
 
 import javax.jws.WebService;
+import java.util.Comparator;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -21,12 +22,14 @@ public class ShopServiceImpl implements ShopService {
 
     @Override
     public Item findById(int id) {
-        return null;
+        return items.get(id);
     }
 
     @Override
     public Item create(Item item) {
-        return null;
+        item.setId(items.keySet().stream().max(Comparator.comparingInt(f -> f)).orElse(0) + 1);
+        items.put(item.getId(), item);
+        return item;
     }
 
     @Override
