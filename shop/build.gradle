@@ -1,3 +1,6 @@
+apply plugin: 'application'
+mainClassName = 'ru.job4j.shop.ShopPublish'
+
 dependencies {
     compile group: 'javax.jws', name: 'javax.jws-api', version: '1.1'
     compile group: 'javax.xml.ws', name: 'jaxws-api', version: '2.3.1'
