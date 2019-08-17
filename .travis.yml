@@ -7,10 +7,9 @@ sudo: false
 
 before_install:
   - chmod +x gradlew
-  - ./gradlew shop:jar
   - |
     ./gradlew shop:run&
-    SERVER_PID=$!
+    SHOP_PID=$!
 
 # "|" allow multi-line statements which simplified the whole thing.
 # "SERVER_PID=$!" creates a sub-shell.

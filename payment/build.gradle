@@ -1,3 +1,6 @@
+apply plugin: 'application'
+mainClassName = 'ru.job4j.payment.rmi.RMIPaymentServer'
+
 configurations {
     jaxws
 }
@@ -44,4 +47,12 @@ dependencies {
     compile group: 'com.sun.xml.ws', name: 'jaxws-ri', version: '2.3.2'
     compile group: 'javax.xml.soap', name: 'javax.xml.soap-api', version: '1.4.0'
     compile group: 'javax.xml.ws', name: 'jaxws-api', version: '2.3.1'
+}
+
+task rmiregistry(type:Exec) {
+    commandLine 'rmiregistry', '-J-Djava.class.path=build/libs/payment-1.0.jar'
+    standardOutput = new ByteArrayOutputStream()
+    ext.output = {
+        return standardOutput.toString()
+    }
 }
